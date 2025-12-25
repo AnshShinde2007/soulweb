@@ -39,8 +39,90 @@ import imgHeroImage from "../public/monk.png";
 import imgVecteezyIconicArtDecoSadYoungManLookingDownWith604151191 from "../public/placeholder.svg";
 import imgMic2 from "../public/placeholder.svg";
 import imgAnxious from "../public/placeholder.svg";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+
+// Responsive scaling:
+// This file is laid out as a fixed 1440px “canvas” with lots of absolute positioning.
+// To make it responsive with minimal code churn, we scale the whole canvas down on
+// smaller viewports instead of rewriting each section layout.
+const DESIGN_WIDTH = 1440;
+// Fallback canvas height (in design units). We also auto-measure at runtime.
+const DESIGN_HEIGHT_FALLBACK = 12663;
+
+function useResponsiveScale(designWidth: number) {
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const update = () => {
+      const viewportWidth = window.innerWidth;
+      const nextScale = Math.min(1, viewportWidth / designWidth);
+      setScale(nextScale);
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [designWidth]);
+
+  return scale;
+}
+
+function useCanvasDesignHeight(
+  rootRef: React.RefObject<HTMLDivElement>,
+  fallbackHeight: number,
+  scale: number
+) {
+  const [designHeight, setDesignHeight] = useState(fallbackHeight);
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    let rafId = 0;
+
+    const measure = () => {
+      if (!rootRef.current) return;
+      const currentRoot = rootRef.current;
+      const rootRect = currentRoot.getBoundingClientRect();
+
+      let maxBottom = 0;
+      const elements = currentRoot.querySelectorAll<HTMLElement>("*");
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const bottom = rect.bottom - rootRect.top;
+        if (bottom > maxBottom) maxBottom = bottom;
+      });
+
+      const safeScale = scale > 0 ? scale : 1;
+      const nextDesignHeight = Math.max(
+        fallbackHeight,
+        Math.ceil(maxBottom / safeScale)
+      );
+
+      setDesignHeight(nextDesignHeight);
+    };
+
+    const scheduleMeasure = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(measure);
+    };
+
+    scheduleMeasure();
+
+    const resizeObserver = new ResizeObserver(scheduleMeasure);
+    resizeObserver.observe(root);
+
+    window.addEventListener("resize", scheduleMeasure);
+    return () => {
+      cancelAnimationFrame(rafId);
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", scheduleMeasure);
+    };
+  }, [rootRef, fallbackHeight, scale]);
+
+  return designHeight;
+}
 
 
 function HeroImage() {
@@ -1288,8 +1370,33 @@ function AiSoulBot1() {
 }
 
 export default function LandingPageUi() {
+  const scale = useResponsiveScale(DESIGN_WIDTH);
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const designHeight = useCanvasDesignHeight(
+    canvasRef,
+    DESIGN_HEIGHT_FALLBACK,
+    scale
+  );
+
   return (
-    <div className="bg-white relative size-full" data-name="LANDING PAGE UI">
+    <div className="bg-white w-full overflow-x-hidden">
+      <div
+        className="mx-auto"
+        style={{
+          width: DESIGN_WIDTH * scale,
+          height: designHeight * scale,
+        }}
+      >
+        <div
+          ref={canvasRef}
+          style={{
+            width: DESIGN_WIDTH,
+            height: designHeight,
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+          }}
+        >
+          <div className="bg-white relative size-full" data-name="LANDING PAGE UI">
       <div style={{ position: 'relative', top: '-1350px' }}>
       <div className="absolute bg-black h-[2901px] left-0 top-[9539px] w-[1440px]" />
       <div className="absolute border border-[rgba(0,0,0,0)] border-solid h-[450px] left-[calc(14.29%+67.29px)] rounded-bl-[885px] rounded-br-[885px] top-[9539px] w-[893px]" />
@@ -1388,6 +1495,9 @@ export default function LandingPageUi() {
       <Footer1 />
       </div>
       <AnimatedHeaderNav />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
