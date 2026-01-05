@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider, OAuthProvider } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -17,13 +17,23 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase - only in browser or when API key exists
+let app;
+let auth;
+let googleProvider;
+let appleProvider;
+let analytics;
 
-// Initialize Analytics only in browser environment
-export const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+if (typeof window !== 'undefined' || process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+    try {
+        app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+        auth = getAuth(app);
+        googleProvider = new GoogleAuthProvider();
+        appleProvider = new OAuthProvider('apple.com');
+        analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+    } catch (error) {
+        console.warn('Firebase initialization failed (probably missing keys during build):', error);
+    }
+}
 
-// Auth & providers
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-export const appleProvider = new OAuthProvider('apple.com');
+export { app, auth, googleProvider, appleProvider, analytics };
