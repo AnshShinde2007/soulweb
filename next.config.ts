@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: 'export',
   
   async headers() {
     return [
@@ -16,6 +15,16 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+  },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
