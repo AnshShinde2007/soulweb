@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getAnalytics, Analytics } from "firebase/analytics";
-import { getAuth, GoogleAuthProvider, OAuthProvider, Auth } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, Auth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,7 +21,6 @@ const firebaseConfig = {
 let app: FirebaseApp | undefined;
 let auth: Auth | undefined;
 let googleProvider: GoogleAuthProvider | undefined;
-let appleProvider: OAuthProvider | undefined;
 let analytics: Analytics | null | undefined;
 
 if (typeof window !== 'undefined' || process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
@@ -29,11 +28,10 @@ if (typeof window !== 'undefined' || process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
         app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
         auth = getAuth(app);
         googleProvider = new GoogleAuthProvider();
-        appleProvider = new OAuthProvider('apple.com');
         analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
     } catch (error) {
         console.warn('Firebase initialization failed (probably missing keys during build):', error);
     }
 }
 
-export { app, auth, googleProvider, appleProvider, analytics };
+export { app, auth, googleProvider, analytics };

@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider, appleProvider } from '../firebase';
+import { auth, googleProvider } from '../firebase';
 import { useRouter } from 'next/navigation';
 import imgImage48 from "../../public/google.png";
-import imgImage49 from "../../public/apple.png";
+
 import imgBackBlurLogo from "../../public/logo3.png";
 
 export default function App() {
@@ -87,33 +87,7 @@ export default function App() {
         }
     };
 
-    const handleAppleSignup = async () => {
-        setError('');
-        setLoading(true);
 
-        if (!auth || !appleProvider) {
-            setError('Apple sign-in not available');
-            setLoading(false);
-            return;
-        }
-
-        try {
-            const result = await signInWithPopup(auth, appleProvider);
-            console.log('Apple signup successful:', result.user);
-            router.push('/dashboard');
-        } catch (err: any) {
-            if (err.code === 'auth/popup-closed-by-user') {
-                setError('Sign-in popup was closed. Please try again.');
-            } else if (err.code === 'auth/cancelled-popup-request') {
-                console.log('Popup cancelled');
-            } else {
-                setError('Failed to sign in with Apple. Please try again.');
-            }
-            console.error('Apple signup error:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     return (
         <div className="min-h-screen bg-black relative overflow-hidden flex flex-col">
@@ -274,7 +248,7 @@ export default function App() {
                         <p className="text-white text-center font-['Poppins'] text-[14px] sm:text-[15px] md:text-[16px] mb-6 sm:mb-7 md:mb-8 lg:mb-[32px]">
                             Sign Up With
                         </p>
-                        <div className="flex items-center justify-center gap-5 sm:gap-6 md:gap-[30px]">
+                        <div className="flex items-center justify-center">
                             <button 
                                 type="button"
                                 onClick={handleGoogleSignup}
@@ -282,14 +256,6 @@ export default function App() {
                                 className="w-[50px] h-[50px] sm:w-[55px] sm:h-[55px] md:w-[60px] md:h-[60px] bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <Image src={imgImage48} alt="Google" width={30} height={30} className="w-[24px] h-[24px] sm:w-[28px] sm:h-[28px] md:w-[30px] md:h-[30px]" />
-                            </button>
-                            <button 
-                                type="button"
-                                onClick={handleAppleSignup}
-                                disabled={loading}
-                                className="w-[50px] h-[50px] sm:w-[55px] sm:h-[55px] md:w-[60px] md:h-[60px] bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                <Image src={imgImage49} alt="Apple" width={30} height={30} className="w-[24px] h-[24px] sm:w-[28px] sm:h-[28px] md:w-[30px] md:h-[30px]" />
                             </button>
                         </div>
                     </div>
