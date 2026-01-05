@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, GoogleAuthProvider, OAuthProvider } from 'firebase/auth';
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { getAnalytics, Analytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider, OAuthProvider, Auth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,11 +18,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase - only in browser or when API key exists
-let app;
-let auth;
-let googleProvider;
-let appleProvider;
-let analytics;
+let app: FirebaseApp | undefined;
+let auth: Auth | undefined;
+let googleProvider: GoogleAuthProvider | undefined;
+let appleProvider: OAuthProvider | undefined;
+let analytics: Analytics | null | undefined;
 
 if (typeof window !== 'undefined' || process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
     try {

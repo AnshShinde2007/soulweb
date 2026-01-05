@@ -20,6 +20,13 @@ export default function App() {
         e.preventDefault();
         setError(null);
         setLoading(true);
+        
+        if (!auth) {
+            setError('Authentication service not available');
+            setLoading(false);
+            return;
+        }
+        
         try {
             await signInWithEmailAndPassword(auth, email, password);
             router.push('/dashboard');
@@ -34,6 +41,13 @@ export default function App() {
     const handleGoogleSignIn = async () => {
         setError(null);
         setLoading(true);
+        
+        if (!auth || !googleProvider) {
+            setError('Google sign-in not available');
+            setLoading(false);
+            return;
+        }
+        
         try {
             await signInWithPopup(auth, googleProvider);
             router.push('/dashboard');

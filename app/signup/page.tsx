@@ -23,6 +23,12 @@ export default function App() {
         setError('');
         setLoading(true);
 
+        if (!auth) {
+            setError('Authentication service not available');
+            setLoading(false);
+            return;
+        }
+
         try {
             // Create user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -57,6 +63,12 @@ export default function App() {
         setError('');
         setLoading(true);
 
+        if (!auth || !googleProvider) {
+            setError('Google sign-in not available');
+            setLoading(false);
+            return;
+        }
+
         try {
             const result = await signInWithPopup(auth, googleProvider);
             console.log('Google signup successful:', result.user);
@@ -78,6 +90,12 @@ export default function App() {
     const handleAppleSignup = async () => {
         setError('');
         setLoading(true);
+
+        if (!auth || !appleProvider) {
+            setError('Apple sign-in not available');
+            setLoading(false);
+            return;
+        }
 
         try {
             const result = await signInWithPopup(auth, appleProvider);

@@ -13,6 +13,11 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!auth) {
+            setLoading(false);
+            return;
+        }
+        
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 setUser(currentUser);
@@ -26,6 +31,8 @@ export default function Dashboard() {
     }, [router]);
 
     const handleSignOut = async () => {
+        if (!auth) return;
+        
         try {
             await signOut(auth);
             router.push('/');
