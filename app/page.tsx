@@ -36,6 +36,12 @@ import imgMic2 from "../public/placeholder.svg";
 import imgAnxious from "../public/placeholder.svg";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 
 function HeroImage() {
@@ -186,9 +192,43 @@ function Group1() {
 }
 
 function WellnessLandingPoint() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const circleRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (sectionRef.current && circleRef.current && imageRef.current) {
+      // Animate the circle with scale effect
+      gsap.from(circleRef.current, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: circleRef.current,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1,
+        },
+      });
+
+      // Animate the image with slide up effect
+      gsap.from(imageRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: imageRef.current,
+          start: "top 85%",
+          end: "top 60%",
+          scrub: 1,
+        },
+      });
+    }
+  }, []);
+
   return (
-    <div className="absolute contents left-[calc(7.14%+17.14px)] top-[1520px] pointer-events-none" data-name="WELLNESS LANDING POINT"> {/* decorative backdrop */}
-      <div className="absolute left-[calc(7.14%+17.14px)] size-[1200px] top-[1520px]">
+    <div ref={sectionRef} className="absolute contents left-[calc(7.14%+17.14px)] top-[1520px] pointer-events-none" data-name="WELLNESS LANDING POINT"> {/* decorative backdrop */}
+      <div ref={circleRef} className="absolute left-[calc(7.14%+17.14px)] size-[1200px] top-[1520px]">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1200 1200">
           <circle cx="600" cy="600" id="Ellipse 29" r="599" stroke="url(#paint0_linear_1_393)" strokeWidth="2" />
           <defs>
@@ -203,7 +243,7 @@ function WellnessLandingPoint() {
       </div>
       <Group />
       <Group1 />
-      <div className="absolute h-[636px] left-[calc(28.57%+58.57px)] rounded-bl-[152px] top-[1984px] w-[500px]" data-name="vecteezy_a-serene-silhouette-of-a-woman-s-profile-isolated-on-a_47759678 1">
+      <div ref={imageRef} className="absolute h-[636px] left-[calc(28.57%+58.57px)] rounded-bl-[152px] top-[1984px] w-[500px]" data-name="vecteezy_a-serene-silhouette-of-a-woman-s-profile-isolated-on-a_47759678 1">
         <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-bl-[152px]">
           <Image alt="" src={imgVecteezyASereneSilhouetteOfAWomanSProfileIsolatedOnA477596781} fill className="absolute h-full left-0 max-w-none top-0 w-full object-cover" />
         </div>
@@ -213,8 +253,27 @@ function WellnessLandingPoint() {
 }
 
 function Group2() {
+  const groupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (groupRef.current) {
+      gsap.from(groupRef.current.children, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: groupRef.current,
+          start: "top 80%",
+          end: "top 60%",
+          scrub: 1,
+        },
+      });
+    }
+  }, []);
+
   return (
-    <div className="absolute contents leading-[0] left-[calc(35.71%+48.71px)] not-italic text-center text-white top-[3050px]">
+    <div ref={groupRef} className="absolute contents leading-[0] left-[calc(35.71%+48.71px)] not-italic text-center text-white top-[3050px]">
       <div className="absolute flex flex-col font-['Poppins:Medium',sans-serif] h-[62px] justify-center left-[calc(35.71%+205.71px)] text-[42px] top-[3081px] translate-x-[-50%] translate-y-[-50%] w-[314px]">
         <p className="leading-[normal]">More Than <CountUp to={240} duration={1} /></p>
       </div>
@@ -226,8 +285,27 @@ function Group2() {
 }
 
 function Group4() {
+  const groupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (groupRef.current) {
+      gsap.from(groupRef.current.children, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: groupRef.current,
+          start: "top 80%",
+          end: "top 60%",
+          scrub: 1,
+        },
+      });
+    }
+  }, []);
+
   return (
-    <div className="absolute contents leading-[0] left-[calc(35.71%+39.71px)] not-italic text-center text-white top-[3542px]">
+    <div ref={groupRef} className="absolute contents leading-[0] left-[calc(35.71%+39.71px)] not-italic text-center text-white top-[3542px]">
       <div className="absolute flex flex-col font-['Poppins:Medium',sans-serif] h-[62px] justify-center left-[calc(35.71%+205.21px)] text-[42px] top-[3573px] translate-x-[-50%] translate-y-[-50%] w-[283px]">
         <p className="leading-[normal]">More Than <CountUp to={22} duration={1} /></p>
       </div>
@@ -239,8 +317,27 @@ function Group4() {
 }
 
 function Group3() {
+  const groupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (groupRef.current) {
+      gsap.from(groupRef.current.children, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: groupRef.current,
+          start: "top 80%",
+          end: "top 60%",
+          scrub: 1,
+        },
+      });
+    }
+  }, []);
+
   return (
-    <div className="absolute contents left-[calc(35.71%+29.71px)] not-italic text-center text-white top-[3296px]">
+    <div ref={groupRef} className="absolute contents left-[calc(35.71%+29.71px)] not-italic text-center text-white top-[3296px]">
       <p className="absolute font-['Poppins:Medium',sans-serif] h-[62px] leading-[normal] left-[calc(35.71%+205.71px)] text-[42px] top-[3296px] translate-x-[-50%] w-[230px]"><CountUp to={200} duration={1} />k Plus</p>
       <div className="absolute flex flex-col font-['Poppins:Regular',sans-serif] h-[54px] justify-center leading-[0] left-[calc(35.71%+207.21px)] opacity-50 text-[18px] top-[3395px] translate-x-[-50%] translate-y-[-50%] w-[355px]">
         <p className="leading-[30px]">Partnered With Practitioners Worldwide.</p>
@@ -628,9 +725,44 @@ function MicroToolsCard() {
 }
 
 function SoulYatriWorks() {
+  const titleRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (titleRef.current) {
+      gsap.from(titleRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 85%",
+          end: "top 65%",
+          scrub: 1,
+        },
+      });
+    }
+
+    if (cardsRef.current) {
+      const cards = cardsRef.current.querySelectorAll('[data-name*="CARD"]');
+      gsap.from(cards, {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 75%",
+          end: "top 50%",
+          scrub: 1,
+        },
+      });
+    }
+  }, []);
+
   return (
-    <div className="absolute contents left-[calc(7.14%-15.86px)] top-[5646px]" data-name="SOUL YATRI WORKS">
-      <div className="absolute flex flex-col font-['Poppins:Medium',sans-serif] h-[47px] justify-center leading-[0] left-[calc(28.57%+308.57px)] not-italic text-[32px] text-black text-center top-[5669.5px] translate-x-[-50%] translate-y-[-50%] w-[472px]">
+    <div ref={cardsRef} className="absolute contents left-[calc(7.14%-15.86px)] top-[5646px]" data-name="SOUL YATRI WORKS">
+      <div ref={titleRef} className="absolute flex flex-col font-['Poppins:Medium',sans-serif] h-[47px] justify-center leading-[0] left-[calc(28.57%+308.57px)] not-italic text-[32px] text-black text-center top-[5669.5px] translate-x-[-50%] translate-y-[-50%] w-[472px]">
         <p className="leading-[normal]">How Soul Yatri Works For You</p>
       </div>
       <GuidedPlanCard />
