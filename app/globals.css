@@ -83,6 +83,45 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Design tokens (inferred): keep in sync with Figma tokens when available */
+:root {
+  --font-sans: 'Poppins', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+
+  /* Colors */
+  --color-primary: #FF7B00;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #FF9740;
+  --color-muted: #ececf0;
+  --color-bg: var(--background);
+  --color-surface: var(--card);
+  --text-default: #030213;
+  --text-muted: #717182;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.3);
+
+  /* Breakpoints (CSS variables for utility) */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

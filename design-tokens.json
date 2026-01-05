@@ -1,0 +1,40 @@
+{
+  "colors": {
+    "primary": "#FF7B00",
+    "primaryForeground": "#FFFFFF",
+    "secondary": "#FF9740",
+    "muted": "#ececf0",
+    "bg": "var(--background)",
+    "surface": "var(--card)",
+    "textDefault": "#030213",
+    "textMuted": "#717182"
+  },
+  "spacing": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px"
+  },
+  "radii": {
+    "sm": "6px",
+    "md": "12px",
+    "lg": "20px",
+    "pill": "9999px"
+  },
+  "shadows": {
+    "sm": "0 1px 2px rgba(0,0,0,0.05)",
+    "md": "0 10px 30px rgba(0,0,0,0.12)",
+    "lg": "0 25px 60px rgba(0,0,0,0.3)"
+  },
+  "breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px"
+  },
+  "typography": {
+    "fontFamily": "Poppins, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif",
+    "baseFontSize": "16px"
+  }
+}
