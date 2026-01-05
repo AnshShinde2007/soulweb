@@ -118,7 +118,7 @@ export default function App() {
     return (
         <div className="min-h-screen bg-black relative overflow-hidden flex flex-col">
             {/* Background decorative blurs */}
-            <div className="fixed top-[-340px] left-[-340px] w-[680px] h-[680px] pointer-events-none">
+            <div className="fixed top-[-170px] left-[-170px] sm:top-[-340px] sm:left-[-340px] w-[340px] h-[340px] sm:w-[680px] sm:h-[680px] pointer-events-none">
                 <div className="w-full h-full relative">
                     <svg className="w-full h-full" fill="none" viewBox="0 0 1280 1280">
                         <g filter="url(#filter0_f_1_59)">
@@ -135,7 +135,7 @@ export default function App() {
                 </div>
             </div>
 
-            <div className="fixed bottom-[-200px] right-[-200px] w-[400px] h-[400px] pointer-events-none">
+            <div className="fixed bottom-[-100px] right-[-100px] sm:bottom-[-200px] sm:right-[-200px] w-[200px] h-[200px] sm:w-[400px] sm:h-[400px] pointer-events-none">
                 <div className="w-full h-full relative">
                     <svg className="w-full h-full" fill="none" viewBox="0 0 900 900">
                         <g filter="url(#filter0_f_1_61)">
@@ -152,7 +152,7 @@ export default function App() {
                 </div>
             </div>
 
-            <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1024px] h-[1024px] pointer-events-none">
+            <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[512px] h-[512px] sm:w-[1024px] sm:h-[1024px] pointer-events-none">
                 <div className="w-full h-full relative">
                     <svg className="w-full h-full" fill="none" viewBox="0 0 1024 1024">
                         <g filter="url(#filter0_ii_1_63)">
@@ -181,34 +181,34 @@ export default function App() {
             </div>
 
             {/* Header */}
-            <header className="relative z-10 flex items-center justify-between px-[85px] py-[41px]">
-                <div className="flex items-center gap-4">
-                    <Link href="/login" className="text-white opacity-50 font-['Poppins'] text-[14px]">Login</Link>
-                    <div className="h-[20px] w-px bg-white opacity-50" />
-                    <Link href="/signup" className="text-white font-['Poppins'] text-[14px]">Signup</Link>
+            <header className="relative z-10 flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-[85px] py-4 sm:py-6 md:py-8 lg:py-[41px]">
+                <div className="flex items-center gap-2 sm:gap-4">
+                    <Link href="/login" className="text-white opacity-50 font-['Poppins'] text-[12px] sm:text-[14px]">Login</Link>
+                    <div className="h-[15px] sm:h-[20px] w-px bg-white opacity-50" />
+                    <Link href="/signup" className="text-white font-['Poppins'] text-[12px] sm:text-[14px]">Signup</Link>
                 </div>
 
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <Image src={imgBackBlurLogo} alt="Logo" className="h-[41px] w-auto" width={41} height={41} />
+                    <Image src={imgBackBlurLogo} alt="Logo" className="h-[30px] sm:h-[35px] md:h-[41px] w-auto" width={41} height={41} />
                 </div>
 
-                <Link href="/" className="text-white opacity-50 font-['Poppins'] text-[14px]">Home</Link>
+                <Link href="/" className="text-white opacity-50 font-['Poppins'] text-[12px] sm:text-[14px]">Home</Link>
             </header>
 
             {/* Main Content */}
-            <main className="relative z-10 flex-1 flex items-center justify-center px-4">
+            <main className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 md:px-8">
                 <div className="w-full max-w-[500px]">
-                    <h1 className="text-white text-center mb-[86px] font-['Poppins'] text-[24px]">
+                    <h1 className="text-white text-center mb-8 sm:mb-12 md:mb-16 lg:mb-[86px] font-['Poppins'] text-[20px] sm:text-[22px] md:text-[24px]">
                         Create Your Account
                     </h1>
 
                     {error && (
-                        <div className="bg-red-500/20 border border-red-500 text-red-500 px-4 py-3 rounded-lg text-center font-['Poppins'] text-[14px] mb-4">
+                        <div className="bg-red-500/20 border border-red-500 text-red-500 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-center font-['Poppins'] text-[12px] sm:text-[14px] mb-4">
                             {error}
                         </div>
                     )}
 
-                    <form onSubmit={handleSignup} className="space-y-[50px]">
+                    <form onSubmit={handleSignup} className="space-y-8 sm:space-y-10 md:space-y-12 lg:space-y-[50px]">
                         {/* Full Name Input */}
                         <div>
                             <input
@@ -217,7 +217,7 @@ export default function App() {
                                 value={fullName}
                                 onChange={(e) => setFullName(e.target.value)}
                                 required
-                                className="w-full bg-transparent border-none border-b border-white/50 text-white placeholder:text-white placeholder:opacity-50 font-['Poppins'] text-[16px] pb-[24px] outline-none"
+                                className="w-full bg-transparent border-none border-b border-white/50 text-white placeholder:text-white placeholder:opacity-50 font-['Poppins'] text-[14px] sm:text-[15px] md:text-[16px] pb-3 sm:pb-4 md:pb-5 lg:pb-[24px] outline-none"
                                 style={{ borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'rgba(255, 255, 255, 0.5)' }}
                             />
                         </div>
@@ -231,14 +231,14 @@ export default function App() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                                 suppressHydrationWarning
-                                className="w-full bg-transparent border-none border-b border-white/50 text-white placeholder:text-white placeholder:opacity-50 font-['Poppins'] text-[16px] pb-[24px] outline-none"
+                                className="w-full bg-transparent border-none border-b border-white/50 text-white placeholder:text-white placeholder:opacity-50 font-['Poppins'] text-[14px] sm:text-[15px] md:text-[16px] pb-3 sm:pb-4 md:pb-5 lg:pb-[24px] outline-none"
                                 style={{ borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'rgba(255, 255, 255, 0.5)' }}
                             />
                         </div>
 
                         {/* Password Input */}
                         <div className="relative">
-                            <label className="absolute -top-[12px] left-0 text-white font-['Poppins'] text-[10px]">
+                            <label className="absolute -top-[10px] sm:-top-[12px] left-0 text-white font-['Poppins'] text-[9px] sm:text-[10px]">
                                 Create a Strong Password
                             </label>
                             <input
@@ -248,7 +248,7 @@ export default function App() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 minLength={6}
-                                className="w-full bg-transparent border-none border-b border-white/50 text-white placeholder:text-white placeholder:opacity-50 font-['Poppins'] text-[16px] pb-[24px] outline-none"
+                                className="w-full bg-transparent border-none border-b border-white/50 text-white placeholder:text-white placeholder:opacity-50 font-['Poppins'] text-[14px] sm:text-[15px] md:text-[16px] pb-3 sm:pb-4 md:pb-5 lg:pb-[24px] outline-none"
                                 style={{ borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'rgba(255, 255, 255, 0.5)' }}
                             />
                         </div>
@@ -257,39 +257,39 @@ export default function App() {
                         <button 
                             type="submit" 
                             disabled={loading}
-                            className="w-full bg-[#ff7b00] text-white font-['Poppins'] text-[16px] rounded-[100px] h-[60px] mt-[50px] hover:bg-[#ff8a1a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-[#ff7b00] text-white font-['Poppins'] text-[14px] sm:text-[15px] md:text-[16px] rounded-[100px] h-[50px] sm:h-[55px] md:h-[60px] mt-8 sm:mt-10 md:mt-12 lg:mt-[50px] hover:bg-[#ff8a1a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? 'Creating Account...' : 'Sign Up'}
                         </button>
                     </form>
 
                     {/* Login Link */}
-                    <p className="text-center mt-[32px] text-white font-['Poppins'] text-[10px]">
+                    <p className="text-center mt-6 sm:mt-7 md:mt-8 lg:mt-[32px] text-white font-['Poppins'] text-[9px] sm:text-[10px]">
                         Have an Account?{' '}
                         <Link href="/login" className="underline">Login</Link>
                     </p>
 
                     {/* Social Sign Up */}
-                    <div className="mt-[92px]">
-                        <p className="text-white text-center font-['Poppins'] text-[16px] mb-[32px]">
+                    <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-[92px] mb-8 sm:mb-12">
+                        <p className="text-white text-center font-['Poppins'] text-[14px] sm:text-[15px] md:text-[16px] mb-6 sm:mb-7 md:mb-8 lg:mb-[32px]">
                             Sign Up With
                         </p>
-                        <div className="flex items-center justify-center gap-[30px]">
+                        <div className="flex items-center justify-center gap-5 sm:gap-6 md:gap-[30px]">
                             <button 
                                 type="button"
                                 onClick={handleGoogleSignup}
                                 disabled={loading}
-                                className="w-[60px] h-[60px] bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-[50px] h-[50px] sm:w-[55px] sm:h-[55px] md:w-[60px] md:h-[60px] bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                <Image src={imgImage48} alt="Google" width={30} height={30} />
+                                <Image src={imgImage48} alt="Google" width={30} height={30} className="w-[24px] h-[24px] sm:w-[28px] sm:h-[28px] md:w-[30px] md:h-[30px]" />
                             </button>
                             <button 
                                 type="button"
                                 onClick={handleAppleSignup}
                                 disabled={loading}
-                                className="w-[60px] h-[60px] bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-[50px] h-[50px] sm:w-[55px] sm:h-[55px] md:w-[60px] md:h-[60px] bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                <Image src={imgImage49} alt="Apple" width={30} height={30} />
+                                <Image src={imgImage49} alt="Apple" width={30} height={30} className="w-[24px] h-[24px] sm:w-[28px] sm:h-[28px] md:w-[30px] md:h-[30px]" />
                             </button>
                         </div>
                     </div>
